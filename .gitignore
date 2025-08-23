@@ -1,0 +1,51 @@
+# NeuraVia Project .gitignore
+
+# Dataset files (too large for Git)
+MRI model/dataset/
+dataset/
+*.nii
+*.nii.gz
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Model checkpoints (optional - uncomment if models get too large)
+# *.h5
+# *.hdf5
+# *.pkl
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Test outputs
+test_results/
+predictions/
+outputs/
