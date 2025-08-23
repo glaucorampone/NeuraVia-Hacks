@@ -7,8 +7,6 @@ NEUROVIA_MODELS = {
 
 # Data Paths (Configure these for your environment)
 DATA_PATHS = {
-    'nifti_data_dir': '<NIFTI_DATA_DIR>',  # Path to preprocessed MRI scans
-    'cam_output_dir': '<CAM_OUTPUT_DIR>',  # Path for activation map outputs
     'subjects_csv': 'dataset/neurovia_subjects.csv',
     'brain_masks': 'dataset/brain_masks/'
 }

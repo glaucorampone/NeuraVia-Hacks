@@ -29,20 +29,15 @@ K.set_image_data_format('channels_first')
 
 class NeuraViaPredictor:
     """
-    NeuraVia predictor for Alzheimer's disease classification from MRI scans
+    Predictor for Alzheimer's disease classification from MRI scans
     """
     
     def __init__(self, model_path):
-        """
-        Initialize NeuraVia predictor
-        
-        Args:
-            model_path: Path to trained NeuraVia model
-        """
+
         # Load model with compatibility fixes
         self.model = self._load_model_with_fixes(model_path)
         self.model_name = os.path.basename(model_path)
-        print(f"NeuraVia model loaded: {self.model_name}")
+        print(f"Model loaded: {self.model_name}")
     
     def _load_model_with_fixes(self, model_path):
         """Load model with TensorFlow compatibility fixes"""
@@ -60,21 +55,9 @@ class NeuraViaPredictor:
             return model
             
         except Exception as e:
-            print(f"Warning: Model loading issue: {e}")
-            # Try with custom objects
-            try:
-                custom_objects = {'lr': 'learning_rate'}
-                model = load_model(model_path, custom_objects=custom_objects, compile=False)
-                model.compile(
-                    optimizer=tf.keras.optimizers.Adam(learning_rate=5e-5),
-                    loss='binary_crossentropy',
-                    metrics=['accuracy']
-                )
-                print("Model loaded with custom objects fix")
-                return model
-            except Exception as e2:
-                print(f"Error loading model: {e2}")
-                raise
+            print(f"Error loading model: {e}")
+            raise
+           
     
     def preprocess_mri(self, nifti_path, intensity_percentile=99.0):
         """
@@ -188,8 +171,8 @@ def main():
     predictor = NeuraViaPredictor(model_path)
     
     # Configure data paths
-    data_dir = "<NIFTI_DATA_DIR>"  # Configure with actual data path
-    cam_output_dir = "<CAM_OUTPUT_DIR>"  # Configure with output path
+    data_dir = r"C:\Users\glauc\Desktop\MRI_scans"
+    #cam_output_dir = "<CAM_OUTPUT_DIR>"  # Configure with output path
     
     # Find all NIfTI files
     nifti_files = sorted(glob.glob(os.path.join(data_dir, "*.nii.gz")))
