@@ -6,31 +6,6 @@ Repository containing the code developed during the **NeuraVia Hacks** event.
 
 This repository collects the projects, experiments, and innovative solutions developed during the NeuraVia Hacks hackathon, focused on AI technologies, machine learning, and innovative neural solutions.
 
-## 🚀 Projects
-
-<!-- Add your projects here as you develop them -->
-- **Project 1**: Brief project description
-- **Project 2**: Brief project description
-
-## 🛠️ Technologies Used
-
-- Python
-- JavaScript/TypeScript
-- Machine Learning libraries (TensorFlow, PyTorch, etc.)
-- AI frameworks
-- [Add other technologies used]
-
-## 📁 Repository Structure
-
-```
-NeuraVia-Hacks/
-├── README.md
-├── LICENSE
-├── [project-1]/
-├── [project-2]/
-└── [other-projects]/
-```
-
 ## 🔧 Setup and Installation
 
 1. Clone the repository:
@@ -39,7 +14,7 @@ NeuraVia-Hacks/
    cd NeuraVia-Hacks
    ```
 
-2. Install dependencies for individual projects (see specific READMEs)
+2. Install dependencies for individual projects 
 
 ## 📚 How to Contribute
 
