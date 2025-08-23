@@ -10,6 +10,7 @@ import warnings
 import json
 from typing import Dict, Any, Tuple
 
+from PIL import Image
 # Suppress verbose output
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
@@ -43,7 +44,7 @@ def run_inference(model: Any, processor: Any, image: Any, device: str) -> Dict[s
     
     predicted_class_idx = predictions.argmax().item()
     confidence = predictions.max().item()
-    probabilities = predictions.cpu().numpy()[0]
+    probabilities = predictions.cpu().numpy()[0].tolist()
     
     # Get class label from model config or use index
     if hasattr(model.config, 'id2label') and model.config.id2label:
@@ -56,7 +57,7 @@ def run_inference(model: Any, processor: Any, image: Any, device: str) -> Dict[s
     return {
         "predicted_label": predicted_label,
         "predicted_class_idx": predicted_class_idx,
-        "confidence": confidence,
+        "confidence": float(confidence),
         "probabilities": probabilities,
         "all_labels": all_labels
     }
@@ -111,7 +112,7 @@ def save_results(image: Any, results: Dict[str, Any], model_name: str,
         "predicted_class": results["predicted_label"],
         "predicted_class_idx": results["predicted_class_idx"],
         "confidence": float(results["confidence"]),
-        "all_probabilities": results["probabilities"].tolist(),
+        "all_probabilities": results["probabilities"],
         "original_label": str(original_label),
         "image_size": list(image.size),
         "device_used": device
@@ -122,30 +123,14 @@ def save_results(image: Any, results: Dict[str, Any], model_name: str,
         json.dump(results_data, f, indent=2, ensure_ascii=False)
 
 
-def main():
-    """Main inference pipeline."""
-    # Configuration
-    MODEL_NAME = "DHEIVER/Alzheimer-MRI"
-    DATASET_NAME = "Falah/Alzheimer_MRI"
-    SAMPLE_INDEX = 0
-    
-    # Load dataset and select sample
-    dataset = load_dataset(DATASET_NAME, split="train")
-    sample = dataset[SAMPLE_INDEX]
-    image = sample['image'].convert('RGB')
-    original_label = sample.get('label', 'N/A')
-    
+def process_image_file(image: Image.Image, model_name: str = "DHEIVER/Alzheimer-MRI"):
     # Load model and processor
-    model, processor, device = load_model_and_processor(MODEL_NAME)
-    
+    model, processor, device = load_model_and_processor(model_name)
+
     # Run inference
     results = run_inference(model, processor, image, device)
-    
-    # Save results
-    save_results(image, results, MODEL_NAME, original_label, device)
-    
+
+    # Save results locally (opzionale, utile per debug)
+    # save_results(image, results, model_name, original_label="N/A", device=device)
+
     return results
-
-
-if __name__ == "__main__":
-    results = main()
