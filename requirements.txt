@@ -3,7 +3,6 @@
 
 # Deep Learning Framework (Fixed compatibility)
 tensorflow>=2.8.0
-keras>=2.8.0,<3.0.0
 
 # PyTorch & Transformers (for Efficient-AD)
 torch>=2.0.0
