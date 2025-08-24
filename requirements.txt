@@ -1,12 +1,8 @@
 # NeuraVia Requirements
 # Developed for NeuraVia Hack Challenge
 
-# Deep Learning Framework (Fixed compatibility)
-tensorflow>=2.8.0
-
 # PyTorch & Transformers (for Efficient-AD)
 torch>=2.0.0
-torchvision>=0.15.0
 transformers>=4.30.0
 
 # Datasets & Hugging Face
@@ -27,10 +23,5 @@ seaborn>=0.11.0
 # Image Processing
 pillow>=9.0.0
 
-# Optional: For Class Activation Maps
-keras-vis>=0.4.1
-
-# Optional: For advanced visualizations
-plotly>=5.0.0
 uvicorn
 fastapi
